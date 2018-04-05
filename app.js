@@ -7,6 +7,8 @@ const smtTransport = require('nodemailer-smtp-transport');
 
 const app = express();
 
+var configEmail = require('./config.js');
+
 // View engine setup
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
@@ -35,15 +37,16 @@ app.post('/send', (req, res) => {
         <h3>Message</h3>
         <p>${req.body.message}</p>
     `;
-
+    configEmail.mailOptions.subject = "Italo";
+    configEmail.mailOptions.html = output;
     let transporter = nodemailer.createTransport(smtTransport({
         service: 'gmail',
         host: 'smtp.gmail.com',
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: '', // generated ethereal user
-            pass: '' // generated ethereal password
+            user: 'guilhermebreed@gmail.com', // generated ethereal user
+            pass: '31101967' // generated ethereal password
         },
         tls:{
             rejectUnauthorized: false
@@ -51,13 +54,6 @@ app.post('/send', (req, res) => {
     }));
 
     // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"Guilherme Silva Alves 👻" <guilhermebreed@gmail.com>', // sender address
-        to: 'guilhermebreed@gmail.com, italoandrade04@hotmail.com', // list of receivers
-        subject: 'Teste node email ✔', // Subject line
-        text: 'Olá, me deposite pra mim nessa conta: 666-666-666', // plain text body
-        html: output // html body
-    };
 
     transporter.verify(function(error, success) {
         if (error) {
@@ -68,7 +64,7 @@ app.post('/send', (req, res) => {
      });
 
     // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(configEmail.mailOptions, (error, info) => {
         if (error) {
             return console.log(error);
         }

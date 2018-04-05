@@ -2,7 +2,7 @@
 Envio de e-mail com nodejs
 
 # Configuração do e-mail
-No app.js em let transporter
+No app.js em **let transporter**
 
 auth: {
 

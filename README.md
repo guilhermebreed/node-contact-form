@@ -1,12 +1,12 @@
-# nodecontactform
-Envio de e-mail com nodejs
+# node-contact-form
+Sending mail with Nodejs
 
-# Configuração do e-mail
-No app.js em **let transporter**
+# Email Settings
+In the app.js in **let transporter**
 
 auth: {
 
-            user: 'coloque seu email',
-            pass: 'coloque sua senha'      
+            user: 'put your email',
+            pass: 'put your password'      
 
 },
